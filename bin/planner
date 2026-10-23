@@ -1,0 +1,53 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Planner\Domain\Service\PlannerService;
+use Planner\Infrastructure\Repository\JsonDayRepository;
+use Planner\Infrastructure\Console\Command\Day\DayShowCommand;
+use Planner\Infrastructure\Console\Command\Day\DayCreateCommand;
+use Planner\Infrastructure\Console\Command\Day\DayStatsCommand;
+use Planner\Infrastructure\Console\Command\Schedule\ScheduleAddCommand;
+use Planner\Infrastructure\Console\Command\Schedule\ScheduleEditCommand;
+use Planner\Infrastructure\Console\Command\Schedule\ScheduleRemoveCommand;
+use Planner\Infrastructure\Console\Command\Schedule\ScheduleDoneCommand;
+use Planner\Infrastructure\Console\Command\Schedule\ScheduleUndoneCommand;
+use Planner\Infrastructure\Console\Command\Task\TaskAddCommand;
+use Planner\Infrastructure\Console\Command\Task\TaskEditCommand;
+use Planner\Infrastructure\Console\Command\Task\TaskRemoveCommand;
+use Planner\Infrastructure\Console\Command\Task\TaskDoneCommand;
+use Planner\Infrastructure\Console\Command\Task\TaskUndoneCommand;
+use Planner\Infrastructure\Console\Command\Util\UtilTagsCommand;
+use Symfony\Component\Console\Application;
+
+// Конфигурация
+$dataPath = getenv('PLANNER_DATA_PATH') ?: __DIR__ . '/../data';
+
+// Создаем зависимости
+$repository = new JsonDayRepository($dataPath);
+$plannerService = new PlannerService($repository);
+
+// Создаем приложение
+$application = new Application('Personal Planner', '1.0.0');
+
+// Регистрируем команды
+$application->add(new DayShowCommand($plannerService, $dataPath));
+$application->add(new DayCreateCommand($plannerService, $dataPath));
+$application->add(new DayStatsCommand($plannerService, $dataPath));
+
+$application->add(new ScheduleAddCommand($plannerService, $dataPath));
+$application->add(new ScheduleEditCommand($plannerService, $dataPath));
+$application->add(new ScheduleRemoveCommand($plannerService, $dataPath));
+$application->add(new ScheduleDoneCommand($plannerService, $dataPath));
+$application->add(new ScheduleUndoneCommand($plannerService, $dataPath));
+
+$application->add(new TaskAddCommand($plannerService, $dataPath));
+$application->add(new TaskEditCommand($plannerService, $dataPath));
+$application->add(new TaskRemoveCommand($plannerService, $dataPath));
+$application->add(new TaskDoneCommand($plannerService, $dataPath));
+$application->add(new TaskUndoneCommand($plannerService, $dataPath));
+
+$application->add(new UtilTagsCommand($plannerService, $dataPath));
+
+$application->run();

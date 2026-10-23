@@ -1,0 +1,16 @@
+{
+    "name": "planner/cli",
+    "description": "Personal planner CLI tool",
+    "type": "project",
+    "require": {
+        "php": ">=8.1",
+        "symfony/console": "^6.0|^7.0",
+        "ramsey/uuid": "^4.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Planner\\": "src/"
+        }
+    },
+    "bin": ["bin/planner"]
+}
