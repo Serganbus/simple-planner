@@ -1,5 +1,5 @@
 {
-    "name": "planner/cli",
+    "name": "serganbus/planner-cli",
     "description": "Personal planner CLI tool",
     "type": "project",
     "require": {
