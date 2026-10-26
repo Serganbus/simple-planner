@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Planner\Infrastructure\Console\Command;
 
 use Planner\Domain\Service\PlannerService;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Planner\Domain\Service;
 
 use Planner\Domain\Model\Day;
@@ -76,27 +78,18 @@ class PlannerService
             return false;
         }
 
-        // Обновляем поля (используем reflection, т.к. свойства readonly)
-        $reflection = new \ReflectionClass($item);
-        
         if ($startTime !== null) {
-            $prop = $reflection->getProperty('startTime');
-            $prop->setAccessible(true);
-            $prop->setValue($item, $startTime);
+            $item->startTime = $startTime;
         }
-        
+
         if ($endTime !== null) {
-            $prop = $reflection->getProperty('endTime');
-            $prop->setAccessible(true);
-            $prop->setValue($item, $endTime);
+            $item->endTime = $endTime;
         }
-        
+
         if ($title !== null) {
-            $prop = $reflection->getProperty('title');
-            $prop->setAccessible(true);
-            $prop->setValue($item, $title);
+            $item->title = $title;
         }
-        
+
         if ($tags !== null) {
             $item->tags = $tags;
         }
@@ -193,26 +186,18 @@ class PlannerService
             return false;
         }
 
-        $reflection = new \ReflectionClass($task);
-        
         if ($title !== null) {
-            $prop = $reflection->getProperty('title');
-            $prop->setAccessible(true);
-            $prop->setValue($task, $title);
+            $task->title = $title;
         }
-        
+
         if ($estimatedMinutes !== null) {
-            $prop = $reflection->getProperty('estimatedMinutes');
-            $prop->setAccessible(true);
-            $prop->setValue($task, $estimatedMinutes);
+            $task->estimatedMinutes = $estimatedMinutes;
         }
-        
+
         if ($priority !== null) {
-            $prop = $reflection->getProperty('priority');
-            $prop->setAccessible(true);
-            $prop->setValue($task, $priority);
+            $task->priority = $priority;
         }
-        
+
         if ($tags !== null) {
             $task->tags = $tags;
         }

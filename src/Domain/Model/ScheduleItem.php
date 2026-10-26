@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Planner\Domain\Model;
 
 class ScheduleItem
 {
     public function __construct(
         public readonly string $id,
-        public readonly string $startTime,
-        public readonly string $endTime,
-        public readonly string $title,
+        public string $startTime,
+        public string $endTime,
+        public string $title,
         public array $tags,
         public string $status
     ) {}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Planner\Infrastructure\Repository;
 
 use Planner\Domain\Model\Day;

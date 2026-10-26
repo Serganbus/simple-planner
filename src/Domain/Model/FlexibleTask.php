@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Planner\Domain\Model;
 
 class FlexibleTask
 {
     public function __construct(
         public readonly string $id,
-        public readonly string $title,
-        public readonly int $estimatedMinutes,
-        public readonly string $priority,
+        public string $title,
+        public int $estimatedMinutes,
+        public string $priority,
         public array $tags,
         public string $status
     ) {}
